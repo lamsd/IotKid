@@ -1,0 +1,16 @@
+{
+    "name": "pxt-Iotkid",
+    "version": "1.0.1",
+    "description": "Connect micro:bit to the Internet with a Kulbot module.",
+    "dependencies": {
+        "core": "*"
+    },
+    "files": [
+        "README.md",
+        "main.ts"
+    ],
+    "testFiles": [
+        "test.ts"
+    ],
+    "public": true
+}
