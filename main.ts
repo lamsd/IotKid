@@ -23,14 +23,14 @@ enum Newline {
 //% color=#3452C3 weight=90 icon="\uf1eb" block="IoT_kid:bit"
 namespace IoTkid {
 
-    function writeToSerial(data: string, waitTime: number=100): void {
+    function writeToSerial(data: string, waitTime: number): void {
         serial.writeString(data + "\u000D" + "\u000A")
         if (waitTime > 0) {
             basic.pause(waitTime)
         }
     }
     let wifi_connected: boolean = false
-    let pauseBaseValue: number = 1000
+    let pauseBaseValue: number = 10
     let thingspeak_connected: boolean = false
     let last_upload_successful: boolean = false
 
@@ -56,7 +56,7 @@ namespace IoTkid {
             } else if (serial_str.includes("ERROR") || serial_str.includes("SEND FAIL")) {
                 break
             }
-            if (input.runningTime() - time > 30000) break
+            if (input.runningTime() - time > 10000) break
         }
         return result
     }
@@ -79,13 +79,13 @@ namespace IoTkid {
             baudrate
         )
         // Restart module:
-        writeToSerial("AT+RST", 2000)
+        writeToSerial("AT+RST", 100)
         // WIFI mode = Station mode (client):
-        writeToSerial("AT+CWMODE=1", 5000)
+        writeToSerial("AT+CWMODE=1", 1000)
         // Reset:
-        writeToSerial("AT+RST", 1000)
+        writeToSerial("AT+RST", 100)
         // Connect to AP:
-        writeToSerial("AT+CWJAP=\"" + ssid + "\",\"" + key + "\"", 6000)
+        writeToSerial("AT+CWJAP=\"" + ssid + "\",\"" + key + "\"", 1000)
         wifi_connected =  waitResponse()
         basic.pause(100)
 
