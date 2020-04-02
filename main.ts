@@ -23,7 +23,7 @@ enum Newline {
 //% color=#3452C3 weight=90 icon="\uf1eb" block="IoT_kid:bit"
 namespace IoTkid {
 
-    function writeToSerial(data: string, waitTime: number): void {
+    function writeToSerial(data: string, waitTime: number = 100 ): void {
         serial.writeString(data + "\u000D" + "\u000A")
         if (waitTime > 0) {
             basic.pause(waitTime)
